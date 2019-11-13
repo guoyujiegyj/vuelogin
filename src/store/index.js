@@ -2,13 +2,15 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 // 导入抽离的方法模块。
 import use from '../service/user.js'
+import { longStackSupport } from 'q'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     // 登录的状态,
-    isLogin: false
+    // 先看缓存里有没有token，因为也许以前缓存过。
+    isLogin: localStorage.getItem('token')?true:false
   },
   mutations: {
     // 设置登录的状态
@@ -32,6 +34,11 @@ export default new Vuex.Store({
         // 必须returncode，因为login.vue里等着用呢。
         return code
       })
+    },
+    logout({commit}){
+      commit('setLoginState', false)
+      localStorage.removeItem('token')
+      this.$router.push('/')
     }
   },
   modules: {

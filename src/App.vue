@@ -2,8 +2,9 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link>
+      <router-link to="/login">Login</router-link> |
       <router-link to="/about">About</router-link>
+      <button v-if='$store.state.isLogin' @click='logout'>退出</button>
     </div>
     <router-view/>
   </div>
@@ -12,6 +13,11 @@
 export default {
   data() {
     return {}
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+    }
   }
 };
 </script>

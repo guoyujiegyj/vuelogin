@@ -23,7 +23,7 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    // meta表示此组件被保护。
+    // meta表示此组件需要保护。
     meta: {
       auth: true
     },
@@ -57,8 +57,5 @@ router.beforeEach((to, from, next) => {
   }else{
     next()
   }
-  
-
-
 })
 export default router
