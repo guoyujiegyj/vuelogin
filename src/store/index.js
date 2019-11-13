@@ -29,6 +29,7 @@ export default new Vuex.Store({
           context.commit('setLoginState',true)
           localStorage.setItem('token',token)
         }
+        // 必须returncode，因为login.vue里等着用呢。
         return code
       })
     }

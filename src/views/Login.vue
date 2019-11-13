@@ -62,20 +62,20 @@ export default {
       // 触发store的action里的login事件。将用户信息传过去。
       this.$store.dispatch('login', this.model)
       // action里的异步方法，返回一个Promise,所以通过.then
-      .then(code=>{
-        if(code){
-          console.log(code)
+      .then(res=>{
+        // 获取到的res其实就是action里return的code。
+        if(res){
+          // console.log(res)
           const path=this.$route.query.redirect || '/'
           this.$router.push(path)
         }
       }).catch(error=>{
         const toast = this.$createToast({
-          time: 2000,
+          time: 1000,
           txt: error.message || error.response.data.message || '登录失败',
           type: 'errro  '
         })
         toast.show()
-       
       })
     },
     handleValidate(result) {
